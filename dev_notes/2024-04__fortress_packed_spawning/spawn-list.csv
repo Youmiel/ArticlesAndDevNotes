@@ -1,0 +1,34 @@
+﻿07033af: 24w04a（1.20.5快照）更改了一些刷怪相关的方法，carpet代码跟着变了，故使用旧一点的代码,,,,,,
+,,,,,,
+fabric-carpet SpawnReporter::getSpawnEntries -> NaturalSpawner::mobsAt = if(NaturalSpawner::isInNetherFortressBounds) …,,,,,,
+,,,,,,
+can -> NaturalSpawner::isSpawnPositionOk,,,,,,
+"fit -> ServerLevel::noCollision (&& ServerLevel::noCollision ??, after finalizeSpawn)",,,,,,
+will -> SpawnPlacements::checkSpawnRules && SpawnPlacements::isSpawnPositionOk && Mob::checkSpawnRules * n,,,,,,
+,,,,,,
+1.16.5,内结构-地狱砖,内结构-其他,内结构-玻璃,外结构-地狱砖,外结构-其他,外结构-玻璃
+地毯,"can: YES, fit: NO, will: 100%","can: YES, fit: NO, will: 100%",-,"can: YES, fit: NO, will: 100%",None,-
+按钮,can: NO,can: NO,-,can: NO,None,-
+凋零玫瑰,"can: YES, fit: YES, will: 100%","can: YES, fit: YES, will: 100%",-,"can: YES, fit: YES, will: 100%",None,-
+空气,"can: YES, fit: YES, will: 100%","can: YES, fit: YES, will: 100%",can: NO,"can: YES, fit: YES, will: 100%",None,None
+,,,,,,
+,,,,,,
+1.18.2-pre1,内结构-地狱砖,内结构-其他,内结构-玻璃,外结构-地狱砖,外结构-其他,外结构-玻璃
+地毯,"can: YES, fit: NO, will: 100%","can: YES, fit: NO, will: 100%",-,"can: YES, fit: NO, will: 100%","can: YES, fit: NO, will: 100%",-
+按钮,can: NO,can: NO,-,can: NO,can: NO,-
+凋零玫瑰,"can: YES, fit: YES, will: 100%","can: YES, fit: YES, will: 100%",-,"can: YES, fit: YES, will: 100%","can: YES, fit: YES, will: 100%",-
+空气,"can: YES, fit: YES, will: 100%","can: YES, fit: YES, will: 100%",can: NO,"can: YES, fit: YES, will: 100%","can: YES, fit: YES, will: 100%",can: NO
+,,,,,,
+,,,,,,
+1.18.2-pre2,内结构-地狱砖,内结构-其他,内结构-玻璃,外结构-地狱砖,外结构-其他,外结构-玻璃
+地毯,"can: YES, fit: NO, will: 100%","can: YES, fit: NO, will: 100%",-,None,None,-
+按钮,can: NO,can: NO,-,None,None,-
+凋零玫瑰,"can: YES, fit: YES, will: 100%","can: YES, fit: YES, will: 100%",-,None,None,-
+空气,"can: YES, fit: YES, will: 100%","can: YES, fit: YES, will: 100%",can: NO,None,None,None
+,,,,,,
+,,,,,,
+1.18.2-pre3,内结构-地狱砖,内结构-其他,内结构-玻璃,外结构-地狱砖,外结构-其他,外结构-玻璃
+地毯,"can: YES, fit: NO, will: 100%","can: YES, fit: NO, will: 100%",-,"can: YES, fit: NO, will: 100%",None,-
+按钮,can: NO,can: NO,-,can: NO,None,-
+凋零玫瑰,"can: YES, fit: YES, will: 100%","can: YES, fit: YES, will: 100%",-,"can: YES, fit: YES, will: 100%",None,-
+空气,"can: YES, fit: YES, will: 100%","can: YES, fit: YES, will: 100%",can: NO,"can: YES, fit: YES, will: 100%",None,None
