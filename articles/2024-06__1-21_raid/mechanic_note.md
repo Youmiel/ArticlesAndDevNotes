@@ -9,7 +9,7 @@
 
 ![each_wave](./img/note/each_wave.png)
 
-3. 在每波怪物中会额外生成一些卫道士和掠夺者，其中简单和普通难度可能生成0~1卫道士（简单难度随机到0的概率更大），困难难度可能生成0~2卫道士，所以(2)中有潜力的1、3两波也不是必然刷出是掠夺者的队长。
+3. 在每波怪物中会额外生成一些卫道士和掠夺者，其中简单和普通难度可能生成 0\~1 卫道士（简单难度随机到 0 的概率更大），困难难度可能生成 0\~2 卫道士，所以 (2) 中有潜力的 1、3 两波也不是必然刷出是掠夺者的队长。
 
 4. 袭击迁移机制没有改动。
 
@@ -23,7 +23,7 @@
 
 ## 2024-06-28 更新, MC 1.21
 
-1. 不详之瓶仅能由掠夺者掉落确定为有意设计的特性(Work As Intended, WAI)，相关bug报告 MC-270014 处理结果为 WAI(https://bugs.mojang.com/browse/MC-270014)。另外，1.21更新日志中写的是“Ominous Bottles can be found uncommonly in any Vaults, and are dropped by Raid Captains which are defeated outside a Raid”，与实际情况矛盾，但是 Mojang 似乎并不是很在意(https://bugs.mojang.com/browse/MC-273895)。
+1. 不详之瓶仅能由掠夺者掉落确定为有意设计的特性(Work As Intended, WAI)，相关bug报告 MC-270014 处理结果为 WAI(https://bugs.mojang.com/browse/MC-270014)。另外，1.21 更新日志中写的是“Ominous Bottles can be found uncommonly in any Vaults, and are dropped by Raid Captains which are defeated outside a Raid”，与实际情况矛盾，但是 Mojang 似乎并不是很在意(https://bugs.mojang.com/browse/MC-273895)。
 
 
 
@@ -31,7 +31,7 @@
 
 1. 不祥之兆在当前位置处于一个5级袭击范围内的时候不会转变成袭击之兆。
 
-2. 掠夺者小队长掉落不详之瓶的等级在1~5内随机，各等级掉落概率相同。
+2. 掠夺者小队长掉落不详之瓶的等级在 1\~5 内随机，各等级掉落概率相同。
 
 
 ## 2024-07-09 更新, MC 1.21
