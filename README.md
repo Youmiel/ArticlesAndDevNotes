@@ -24,6 +24,8 @@
 - [快速回血信标(by Zomie101)时序分析](./articles/2022-04__fast_regen_beacon/)
 - [堆叠袭击塔对真人适用程度研究](./articles/2024-02__raid_explaination/)
 - [1.21 袭击机制笔记](./articles/2024-06__1-21_raid/)
+- [1.21.x 袭击者在 \[96, 112\) 区间内特殊表现的代码分析](./articles/2025-04__1-21_captain_replace/)
+
 
 ### 研究记录/开发笔记
 
