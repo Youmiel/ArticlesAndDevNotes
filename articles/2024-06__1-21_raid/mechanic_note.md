@@ -82,3 +82,29 @@
 掠夺者队长掉落不详之瓶只要 96 格内不存在袭击即可，无关队长是否在袭击里；而捡旗帜补位的 AI 行为则需要袭击者确实在袭击中。
 
 上述特性应该从 1.21 开始都生效，具体分析见：[1.21.x 袭击者在 \[96, 112\) 区间内特殊表现的代码分析](../2025-04__1-21_captain_replace/)。
+
+
+## 2025-08-02 更新，部分（原）秘密特性补充
+### 2024-06-28 更新, MC 1.21
+
+不详之瓶无需玩家击杀掠夺者队长即可掉落，摔死/挤压/无源爆炸均可
+
+### 2024-07-06 更新, MC 1.21
+
+Bad Omen 触发为 Raid Omen, 以及 Raid Omen 转变为 Raid 时，会因为在迭代时增删集合而引发 `ConcurrentModificationException`。导致异常发生的那个 gt 后续的状态效果都不会更新。(Credit: Nickid2018, QWERTY770)
+
+### 2024-08-16 更新, MC 1.21.2 快照
+
+[MC-247440](https://bugs.mojang.com/browse/MC-247440) 在事实上已经被修复了，但是 Mojang 只把 [MC-195754](https://bugs.mojang.com/browse/MC-195754) 标记为了“已修复”，不清楚是忘了还是如何。现在 `raidToLeaderMap` 会在队长移出袭击的时候正确更新了。
+
+那么，我曾经构想的借助地狱门传送走袭击队长，让袭击队员捡旗帜来制作队长存储的思路现在可以实现了（还因此产生了 [BV1DL4y1E7nH](https://www.bilibili.com/video/BV1DL4y1E7nH)），或许还能改进成更好的不详之瓶农场。
+
+### 2025-07-24 更新, MC 1.21.5
+
+`ConcurrentModificationException` 在 1.21.5 之后的发生位置与 1.21 ~ 1.21.4 不同，因为 Mojang 修改了一部分状态效果系统的代码。当前版本，在玩家不带有 Raid Omen 但是带有 Bad Omen 的情况下，进入村庄区段会引发 `ConcurrentModificationException` 并导致 Bad Omen 当次移除失败。同样情况下，如果玩家带有 Raid Omen，则 Bad Omen 正常移除，不引发 `ConcurrentModificationException。`
+
+### 2025-08-01 更新, MC 1.21 ~ 1.21.4
+
+1. 1.21 ~ 1.21.4, `ConcurrentModificationException` 除了可以由前述袭击相关状态效果引发外，还可以由伤害吸收制造。具体做法是在伤害吸收效果结束前 1gt 耗尽伤害吸收血量，下个 gt 伤害吸收效果更新时会移除两次（效果耗尽 + 计时结束），代码执行过程中出现了先调用 `HashMap::remove()` 再调用 `Iterator::remove()`，后者执行过程中会因为集合结构被修改而抛出 `ConcurrentModificationException`。
+
+2. 生物（和玩家）身上拥有的状态效果由一个 `HashMap<Holder<MobEffect>, MobEffectInstance>` 存储，但是 Mojang 没有为 `Holder<MobEffect>` 实现 `hashcode()` 方法，且在计算并更新状态效果时直接使用迭代器遍历这个 hashmap。因此，生物的各个状态效果之间的计算顺序并不稳定，每次游戏进程重启、`HashMap` 扩容（扩容节点：状态效果数 12、24，原版状态效果总数不够到下一次扩容）等因素都会改变状态效果的计算顺序。该特性同样适用于 1.21.5 以后的版本，暂不清楚如何有意义地利用。
