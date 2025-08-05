@@ -1,5 +1,7 @@
 # 1.21.5+ 不祥之兆无限转化袭击之兆代码分析 —— 并发修改异常及其利用
 
+**如果你需要与其他人谈论这个特性，我认为“无限转化袭击之兆”、“无限袭击之兆”、“无尽袭击之兆”、“infiniOmen”、“OmenInfinitum” 都是不错的名字**（credit: Ryan 100c, Lemon_Iced, 清云流烟）。
+
 据网友反馈，有一部分袭击农场的设计在 1.21.5 及以上使用时，不祥之兆转化为袭击之兆后并没有消失，在效果持续的 100 分钟内，每 30 秒即可免费制造一次袭击之兆。本文将对上述特性进行代码解释，并讨论相关原理的拓展应用。
 
 在此特别感谢 Lemon_Iced, Nickid2018, s_yh 等人在研究过程中提供的帮助，排名不分先后。
@@ -11,7 +13,8 @@
 
 在集合迭代时，不祥之兆的代码逻辑中修改了集合结构（添加袭击之兆），使得 hashmap 的迭代器在 `iterator.remove()` 的时候抛出 `ConcurrentModificationException` (并发修改异常)，没有成功移除不祥之兆效果。直到下一游戏刻，不祥之兆再次转换袭击之兆时才成功移除。
 
-*注：`ConcurrentModificationException` 并不一定需要在多线程环境下触发，这个问题中的异常就完全是单线程下制造的。*
+*注：`ConcurrentModificationException` 并不一定需要在多线程环境下触发，这个问题中的异常就完全是单线程环境下制造的。*
+
 
 ## 目录
 - [TL;DR](#tldr)
@@ -183,6 +186,8 @@ class BadOmenStatusEffect extends StatusEffect {
 
 对于常规触发的设计，最小触发周期不确定，存在两种结果，确切地来说，取决于不祥之兆和袭击之兆在同一游戏刻内的运算顺序，而这个运算顺序不是绝对确定的。阅读前面的代码，可以发现 `livingEntity.activeStatusEffect` 是 `HashMap<RegistryEntry<StatusEffect>, StatusEffectInstance>` 类型，并且 Mojang 没有为 `RegistryEntry.Reference<T>` (注册表项的引用，`RegistryEntry<T>` 接口的实现) 实现 `hashCode()` 方法。这意味着每次程序启动，同样的一组状态效果会有不同的遍历顺序，而集合扩容（触发 rehash）也会进一步影响它们的遍历顺序。
 
+以上分析可以使用 mod 验证，mixin 插入点选择一个注册项初始化完毕的位置，构造一个同样类型的 `HashMap`，将状态效果存入 map 再输出遍历结果，即可验证。
+
 #### 常规触发，如果不祥之兆先于袭击之兆
 
 剩余时间指 `StatusEffect::canApplyUpdateEffect()` 被调用时的效果剩余时间，后面同理。
@@ -253,7 +258,7 @@ class BadOmenStatusEffect extends StatusEffect {
 
 除了补全未实现的方法、更换更合适的数据结构以外，最核心的问题是在状态效果集合迭代时添加了新的状态效果，而现有状态效果系统并没有考虑到这样特殊的用法。解决办法是避免在遍历集合时添加新的状态效果（我看把不祥之兆改成直接生成袭击就挺好的，对吧 `:P`），或者干脆为了这个需求重构一下状态效果系统。
 
-至于何时修复，要看这个特性什么时候传到 Mojang，或者 Mojang 哪天心血来潮随机重构一下状态效果的代码然后就修复了。
+至于何时修复，要看这个特性什么时候传到 Mojang，或者 Mojang 哪天心血来潮随机重构一下状态效果的代码然后说不定就修复了。
 
 
 ## 五、1.21.5 前后 CME 触发情况差异
