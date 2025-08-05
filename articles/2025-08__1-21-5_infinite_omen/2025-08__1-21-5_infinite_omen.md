@@ -50,7 +50,7 @@ implements Attackable, ServerWaypoint {
         if (world instanceof ServerWorld) {
             ServerWorld lv = (ServerWorld)world;
             Iterator<Object> iterator = this.activeStatusEffects.keySet().iterator();
-            // activeStatusEffects 是一个 hashmap, 将状态效果注册表项和生物带有的状态效果实例联系起来
+            // activeStatusEffects 是一个 hashmap, 将状态效果注册项目和生物带有的状态效果实例联系起来
             // 瞬时的状态效果不会加入，例如 瞬间伤害 和 瞬间治疗
             try {
                 while (iterator.hasNext()) {
@@ -184,9 +184,9 @@ class BadOmenStatusEffect extends StatusEffect {
 
 为表述清晰，以下使用“常规触发”指代常见的、玩家获得袭击之兆时处于村庄区段内的时长大于 1 游戏刻的效果获取方式；用“无限触发”指代前述玩家仅处于村庄区段内 1 游戏刻的袭击之兆效果无限获取方式。
 
-对于常规触发的设计，最小触发周期不确定，存在两种结果，确切地来说，取决于不祥之兆和袭击之兆在同一游戏刻内的运算顺序，而这个运算顺序不是绝对确定的。阅读前面的代码，可以发现 `livingEntity.activeStatusEffect` 是 `HashMap<RegistryEntry<StatusEffect>, StatusEffectInstance>` 类型，并且 Mojang 没有为 `RegistryEntry.Reference<T>` (注册表项的引用，`RegistryEntry<T>` 接口的实现) 实现 `hashCode()` 方法。这意味着每次程序启动，同样的一组状态效果会有不同的遍历顺序，而集合扩容（触发 rehash）也会进一步影响它们的遍历顺序。
+对于常规触发的设计，最小触发周期不确定，存在两种结果，确切地来说，取决于不祥之兆和袭击之兆在同一游戏刻内的运算顺序，而这个运算顺序不是绝对确定的。阅读前面的代码，可以发现 `livingEntity.activeStatusEffect` 是 `HashMap<RegistryEntry<StatusEffect>, StatusEffectInstance>` 类型，并且 Mojang 没有为 `RegistryEntry.Reference<T>` (注册项目的引用，`RegistryEntry<T>` 接口的实现) 实现 `hashCode()` 方法。这意味着每次程序启动，同样的一组状态效果会有不同的遍历顺序，而集合扩容（触发 rehash）也会进一步影响它们的遍历顺序。
 
-以上分析可以使用 mod 验证，mixin 插入点选择一个注册项初始化完毕的位置，构造一个同样类型的 `HashMap`，将状态效果存入 map 再输出遍历结果，即可验证。
+以上分析可以使用 mod 验证，mixin 插入点选择一个注册项目初始化完毕的位置，构造一个同样类型的 `HashMap`，将状态效果存入 map 再输出遍历结果，即可验证。
 
 #### 常规触发，如果不祥之兆先于袭击之兆
 
