@@ -26,6 +26,7 @@
 - [1.21 袭击机制笔记](./articles/2024-06__1-21_raid/)
 - [1.21.x 袭击者在 \[96, 112\) 区间内特殊表现的代码分析](./articles/2025-04__1-21_captain_replace/)
 - [1.21.5+ 不祥之兆无限转化袭击之兆代码分析 —— 并发修改异常及其利用](./articles/2025-08__1-21-5_infinite_omen/2025-08__1-21-5_infinite_omen.md)
+- [船与潜影贝的旋转问题](./articles/2025-09__shulker_rotation/2025-09__shulker_rotation.md)
 
 
 ### 研究记录/开发笔记
