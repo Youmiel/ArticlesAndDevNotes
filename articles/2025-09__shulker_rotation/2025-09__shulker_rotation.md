@@ -214,8 +214,23 @@ public class ShulkerEntity extends GolemEntity implements Monster {
     /* ... */
 }
 ```
+```java
+public abstract class LivingEntity extends Entity {
+    /* ... */
+	protected LivingEntity(EntityType<? extends LivingEntity> entityType, World world) {
+		super(entityType, world);
+        /* ...其他无关的初始化逻辑... */
+		this.setYaw((float)(Math.random() * (float) (Math.PI * 2)));    // 将 yaw（单位是角度）设置为 [0.0f, 2 * PI) 中的随机值
+		this.headYaw = this.getYaw();
+        /* ...其他无关的初始化逻辑... */
+	}
+    /* ... */
+}
+```
 
 不难发现，以上代码不是初始化，就是处理客户端-服务端之间的同步逻辑，没有在后续改变水平朝向。
+
+值得注意的是在 `LivingEntity` 构造器中，生物的水平朝向被初始化为 `[0.0f, 2 * PI)` 中的随机值，但是这一属性是按照角度来使用的，这就导致大部分生物被创建时会大致朝向 +z 方向而不是别的方向。对于潜影贝来说，`/summon` 命令、刷怪蛋生成会调用 `ShulkerEntity.initialize(...)` 方法，水平旋转严格为 `0.0f`；而末地城连带生成、因潜影弹击中而生成的潜影贝不会调用 `ShulkerEntity.initialize(...)` 方法，水平旋转为 `[0.0f, 2 * PI)` 中的随机值。
 
 
 ## 七、乘客上船时是否会改变水平朝向
@@ -391,7 +406,7 @@ yellowxuuu 的视频中只是演示了分离装置并用“手性”来解释这
 
 ## 十一、恢复原始水平朝向
 
-下图是一种将任意水平朝向的潜影贝逐步调整回 +z 朝向的原型装置（水平旋转为 0 时的朝向）设计版本为 1.18.1。只保证朝向相同，不保证 `yaw` 的数值相等，有可能是 `360.0f`, `-360.0f` 等数字。红色下界砖为潜影贝初始位置。
+下图是一种将任意水平朝向的潜影贝逐步调整回 +z 朝向（水平旋转为 0 时的朝向）的原型装置，设计版本为 1.18.1。只保证朝向相同，不保证 `yaw` 的数值相等，有可能是 `360.0f`, `-360.0f` 等数字。红色下界砖为潜影贝初始位置。
 
 几艘船的水平朝向从下至上依次是：
 - （金合欢木船）任意，模拟潜影贝被随机旋转的状况
