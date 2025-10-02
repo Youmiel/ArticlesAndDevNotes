@@ -317,7 +317,7 @@ public class BoatEntity extends Entity {
 
 ## 九、原装置运作原理分析
 
-首先了解一下 Minecraft 的坐标系统。y 轴向上，左手系，实体水平旋转为 0 时朝向 z 轴正方向。图中红、黄、蓝分别表示 x、y、z 三轴，和 F3 屏一致，后面截图时都会带上坐标参考。
+首先了解一下 Minecraft 的坐标系统。y 轴向上，右手系，实体水平旋转为 0 时朝向 z 轴正方向。图中红、黄、蓝分别表示 x、y、z 三轴，和 F3 屏一致，后面截图时都会带上坐标参考。
 
 ![coordinate system](./img/coord_sys.png)
 
