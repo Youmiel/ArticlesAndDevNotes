@@ -16,22 +16,23 @@
 
 ### 专栏
 
-- [从源码角度解析 Minecraft 龙战运作机制](./articles/2020-07__dragon_fight/)
-- [奇葩的末地门框架，竖着放也能用](./articles/2021-03__end_portal_frame/)
-- [1.17 快照版本的美西螈刷新机制](./articles/2021-05__axolotl_spawning/)
-- [用计算机程序模拟分析海带生长规律](./articles/2021-08__kelp_simulate/)
-- [Minecraft Java版本 1.17~1.18 苔藓块特性总结](./articles/2021-12__moss_properties/)
-- [快速回血信标(by Zomie101)时序分析](./articles/2022-04__fast_regen_beacon/)
-- [堆叠袭击塔对真人适用程度研究](./articles/2024-02__raid_explaination/)
-- [1.21 袭击机制笔记](./articles/2024-06__1-21_raid/)
-- [1.21.x 袭击者在 \[96, 112\) 区间内特殊表现的代码分析](./articles/2025-04__1-21_captain_replace/)
-- [1.21.5+ 不祥之兆无限转化袭击之兆代码分析 —— 并发修改异常及其利用](./articles/2025-08__1-21-5_infinite_omen/2025-08__1-21-5_infinite_omen.md)
-- [船与潜影贝的旋转问题](./articles/2025-09__shulker_rotation/2025-09__shulker_rotation.md)
+- [从源码角度解析 Minecraft 龙战运作机制](articles/2020-07__dragon_fight/)
+- [奇葩的末地门框架，竖着放也能用](articles/2021-03__end_portal_frame/)
+- [1.17 快照版本的美西螈刷新机制](articles/2021-05__axolotl_spawning/)
+- [用计算机程序模拟分析海带生长规律](articles/2021-08__kelp_simulate/)
+- [Minecraft Java版本 1.17~1.18 苔藓块特性总结](articles/2021-12__moss_properties/)
+- [快速回血信标(by Zomie101)时序分析](articles/2022-04__fast_regen_beacon/)
+- [堆叠袭击塔对真人适用程度研究](articles/2024-02__raid_explaination/)
+- [1.21 袭击机制笔记](articles/2024-06__1-21_raid/)
+- [1.21.x 袭击者在 \[96, 112\) 区间内特殊表现的代码分析](articles/2025-04__1-21_captain_replace/)
+- [1.21.5+ 不祥之兆无限转化袭击之兆代码分析 —— 并发修改异常及其利用](articles/2025-08__1-21-5_infinite_omen/2025-08__1-21-5_infinite_omen.md)
+- [船与潜影贝的旋转问题](articles/2025-09__shulker_rotation/2025-09__shulker_rotation.md)
+- [物品实体跨越区段的特性分析](articles/2026-01__subchunk_split/2026-01__subchunk_split.md)
 
 
 ### 研究记录/开发笔记
 
-- [海带生长模拟数据](./dev_notes/2021-08__kelp_simulate/)
-- [烟花掠夺稳定性测试](./dev_notes/2023-11__fireworks/)
-- [Minecraft 1.18.2+ 地狱堡垒刷怪游走问题的相关测试数据](./dev_notes/2024-04__fortress_packed_spawning/)
-- [1.21 袭击农场开发笔记](./dev_notes/2024-07__1-21_raid/)
+- [海带生长模拟数据](dev_notes/2021-08__kelp_simulate/)
+- [烟花掠夺稳定性测试](dev_notes/2023-11__fireworks/)
+- [Minecraft 1.18.2+ 地狱堡垒刷怪游走问题的相关测试数据](dev_notes/2024-04__fortress_packed_spawning/)
+- [1.21 袭击农场开发笔记](dev_notes/2024-07__1-21_raid/)
