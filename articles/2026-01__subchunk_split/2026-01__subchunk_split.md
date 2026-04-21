@@ -236,7 +236,7 @@ Is fixed for an entity. Each entity is given an id that is one plus the previous
 
 该值为实体固定不变的唯一标识。每个实体会被分配一个 ID，其数值始终比前一个已分配实体的 ID 大 1。
 
-### Ticking Order, 实体tick顺序
+### Ticking Order, 实体 tick 顺序
 
 This is the order inside the ServerLevel.entityTickList which defines which entity is ticked first. Order is set by order of spawning. 
 
@@ -246,21 +246,21 @@ This is the order inside the ServerLevel.entityTickList which defines which enti
 
 This is the order inside the EntitySectionStorage which is based per subchunk. If you want to find entities in a certain area you will get a list with the order defined here. Crossing subchunks will change the order. 
 
-此顺序由EntitySectionStorage内部定义，其结构基于子区块（subchunk）。当你在特定区域内查找实体时，所获得的列表顺序即由此定义。跨越不同子区块时，实体的排列顺序会发生改变。
+此顺序由 `EntitySectionStorage` 内部定义，其结构基于子区块（subchunk）。当你在特定区域内查找实体时，所获得的列表顺序即由此定义。跨越不同子区块时，实体的排列顺序会发生改变。
 
 ### Modulo 4, 模 4 判定机制
 
 When ticked, entity uses the sum `ItemEntity.tickCount` + `ItemEntity.id` and checks if it is divisible by 4 to begin self-movement. Essentially makes it so items spawned at same tick drop at different ticks from rest, one of 4. 
 
-当实体被更新时，系统会计算 `ItemEntity.tickCount`（游戏刻计数器） 与  `ItemEntity.id` （实体标识码） 的总和，并检查该总和是否能被 4 整除，以此决定是否开始自主移动。这一机制本质上使得同一游戏刻生成的物品会分散在不同时间点开始下落，分配到4种批次中的某一类。
+当实体被更新时，系统会计算 `ItemEntity.tickCount`（游戏刻计数器） 与  `ItemEntity.id` （实体ID） 的总和，并检查该总和是否能被 4 整除，以此决定是否开始自主移动。这一机制本质上使得同一游戏刻生成的物品会分散在不同时间点开始下落，分配到4种批次中的某一类。
 
 ### Item entity merging, 物品实体合并机制
 
 When ticked (so obeys ticking order), entity checks if `ItemEntity.tickCount` is divisible by 2 if the item has crossed a block pos boundary, or 40 otherwise. Then it will check if it can merge with other entities in the same area (obeys iteration order). merging will reuse the entity with larger count, and discard the smaller count entity.
 
-当物品实体被tick时（遵循Ticking order），系统将根据以下条件判定是否执行合并检查：
+当物品实体被tick时（遵循实体 tick 顺序），系统将根据以下条件判定是否执行合并检查：
 
 - 若物品已跨过方块坐标边界，则检查 `ItemEntity.tickCount` 是否能被 2 整除
 - 若未跨边界，则每 40 游戏刻检查一次
 
-满足条件后，实体会在当前区域内寻找可合并的其他物品实体（遵循Iteration Order）。合并时，系统会保留物品数量较多的实体，并销毁数量较少的实体。
+满足条件后，实体会在当前区域内寻找可合并的其他物品实体（遵循迭代顺序）。合并时，系统会保留物品数量较多的实体，并销毁数量较少的实体。
